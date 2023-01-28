@@ -1,12 +1,15 @@
 package com.driver.model;
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name ="ParkingLots")
 public class ParkingLot {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,23 +18,17 @@ public class ParkingLot {
 
     private String address;
 
-    //Mapping with spot, parent - spotList, child - parkingLot
-    @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL)
-    private List<Spot> spotList;
+    @OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL)
+    List<Spot> spotList =new ArrayList<>();
 
     public ParkingLot() {
-    }
-
-    public ParkingLot(String name, String address, List<Spot> spotList) {
-        this.name = name;
-        this.address = address;
-        this.spotList = spotList;
     }
 
     public ParkingLot(String name, String address) {
         this.name = name;
         this.address = address;
     }
+
 
     public int getId() {
         return id;
